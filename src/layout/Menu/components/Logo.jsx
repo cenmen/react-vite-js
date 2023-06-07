@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useLayoutStore } from '@/store';
 import logo from '@/assets/images/logo.png';
 
@@ -11,4 +12,4 @@ const Logo = () => {
 	);
 };
 
-export default Logo;
+export default memo(Logo);

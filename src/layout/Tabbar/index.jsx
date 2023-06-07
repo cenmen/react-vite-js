@@ -3,6 +3,7 @@ import { Button, Tag, Popover } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { shallow } from 'zustand/shallow';
 import { cloneDeep } from 'lodash-es';
+import { useAliveController } from 'react-activation';
 import { routers } from '@/routers';
 import { useLayoutStore } from '@/store';
 
@@ -23,6 +24,13 @@ const Tabbar = () => {
 	);
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
+	const { drop } = useAliveController();
+
+	const dropCacheRoutes = (routes = []) => {
+		routes.forEach(route => {
+			drop(route.pathname);
+		});
+	};
 
 	const onCloseTag = item => {
 		const tabs = cloneDeep(currentTabList);
@@ -31,6 +39,7 @@ const Tabbar = () => {
 		setTimeout(() => {
 			updateLayoutStore({ currentTabList: filters });
 		}, 0);
+		dropCacheRoutes([item]);
 		if (item.active) {
 			filters[0].active = true;
 			const firstPathname = filters[0].pathname;
@@ -49,6 +58,7 @@ const Tabbar = () => {
 		activeItemIndex.active = true;
 		navigate(activeItemIndex.pathname);
 		tabs = [activeItemIndex];
+		dropCacheRoutes(currentTabList.filter((i, idx) => index !== idx));
 		setTimeout(() => {
 			updateLayoutStore({ currentTabList: tabs });
 		}, 0);
@@ -60,10 +70,11 @@ const Tabbar = () => {
 		tabs.splice(index + 1);
 		// 若关闭右侧包含当前高亮则跳转到第一个 tab
 		if (activeItemIndex > index) {
-			tabs[0].active = true;
-			const shouldPath = tabs[0].pathname;
+			tabs[tabs?.length - 1].active = true;
+			const shouldPath = tabs[tabs?.length - 1].pathname;
 			navigate(shouldPath);
 		}
+		dropCacheRoutes(currentTabList.filter((i, idx) => idx > index));
 		setTimeout(() => {
 			updateLayoutStore({ currentTabList: tabs });
 		}, 0);

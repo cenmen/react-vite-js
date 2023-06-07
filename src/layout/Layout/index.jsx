@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Layout } from 'antd';
 import { useOutlet, useLocation, useNavigate } from 'react-router-dom';
 import { animated, useSpring } from '@react-spring/web';
 import { shallow } from 'zustand/shallow';
+import { KeepAlive } from 'react-activation';
 import { useLayoutStore, useAuthStore } from '@/store';
 import LayoutMenu from '../Menu';
 import LayoutHeader from '../Header';
 import LayoutTabbar from '../Tabbar';
-import KeepAlive from '../KeepAlive';
 const { Sider, Content } = Layout;
 
 const getTargetRouteItem = (pathname, routes) => {
@@ -18,17 +18,6 @@ const getTargetRouteItem = (pathname, routes) => {
 			if (target) return target;
 		}
 	}
-};
-
-const getKeepAliveItems = routes => {
-	return routes.reduce((total, cur) => {
-		if (cur.keepAlive) total.push(cur.path);
-		if (cur.children) {
-			const includes = getKeepAliveItems(cur.children);
-			total.push(...includes);
-		}
-		return total;
-	}, []);
 };
 
 const Transition = props => {
@@ -43,7 +32,6 @@ const LayoutIndex = props => {
 		state => ({ isCollapse: state.isCollapse, updateLayoutStore: state.updateLayoutStore }),
 		shallow
 	);
-	const [includeItems, setIncludeItems] = useState(null);
 	const outlet = useOutlet();
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
@@ -56,20 +44,17 @@ const LayoutIndex = props => {
 		});
 	};
 
+	const currentRoute = useMemo(() => getTargetRouteItem(pathname, currentRouter), [pathname, currentRouter]);
+
 	useEffect(() => {
 		listeningWindowResize();
 	}, []);
 
 	useEffect(() => {
-		if (!currentRouter) return;
-		const target = getTargetRouteItem(pathname, currentRouter);
-		if (target && target.redirect) navigate(target.redirect);
-	}, [pathname, currentRouter]);
+		if (currentRoute?.redirect) navigate(currentRoute.redirect);
+	}, [currentRoute]);
 
-	useEffect(() => {
-		const includes = getKeepAliveItems(currentRouter);
-		setIncludeItems(includes);
-	}, [currentRouter]);
+	const childrenContent = children || outlet;
 
 	return (
 		<Layout className='h-screen'>
@@ -81,7 +66,13 @@ const LayoutIndex = props => {
 				<LayoutTabbar />
 				<Content>
 					<Transition>
-						<KeepAlive include={includeItems}>{children ? children : outlet}</KeepAlive>
+						{currentRoute && !currentRoute.noKeepAlive ? (
+							<KeepAlive name={pathname} id={pathname} path={pathname} saveScrollPosition='screen'>
+								{childrenContent}
+							</KeepAlive>
+						) : (
+							childrenContent
+						)}
 					</Transition>
 				</Content>
 			</Layout>

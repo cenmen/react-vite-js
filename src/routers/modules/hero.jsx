@@ -50,14 +50,14 @@ const heroRouter = [
 						title: '调试权限 - keepAlive',
 						path: VIEW_HERO_BLANK_1,
 						element: lazyLoad(React.lazy(() => import('@/views/Hero/Blank'))),
-						auth: AUTH_KEYS.PAGE_HERO_BLANK_1,
-						keepAlive: true
+						auth: AUTH_KEYS.PAGE_HERO_BLANK_1
 					},
 					{
 						title: '调试权限 - noKeepAlive',
 						path: VIEW_HERO_BLANK_2,
 						element: lazyLoad(React.lazy(() => import('@/views/Hero/Blank'))),
-						auth: AUTH_KEYS.PAGE_HERO_BLANK_2
+						auth: AUTH_KEYS.PAGE_HERO_BLANK_2,
+						noKeepAlive: true
 					},
 					{
 						title: '调试权限 - 2（无权限）',
