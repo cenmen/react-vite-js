@@ -1,6 +1,8 @@
+import { useAuthStore } from '@/store';
+
 export const getToken = () => {
-	// const auth = store.getState().auth;
-	// return auth.tokenInfo && auth.tokenInfo.access_token;
+	const tokenInfo = useAuthStore.getState().tokenInfo;
+	return tokenInfo && tokenInfo.access_token;
 };
 
 export const delay = timeout => {
