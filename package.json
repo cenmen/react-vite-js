@@ -1,0 +1,56 @@
+{
+	"name": "react",
+	"private": true,
+	"license": "ISC",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "vite --mode dev",
+		"tst": "vite --mode tst",
+		"prod": "vite --mode prod",
+		"build:dev": "vite build --mode dev",
+		"build:tst": "vite build --mode tst",
+		"build:prod": "vite build --mode prod",
+		"preview": "vite preview",
+		"lint": "yarn run lint:eslint && yarn run lint:prettier",
+		"lint:eslint": "eslint --fix --max-warnings=0 --ext .js,.jsx ./src",
+		"lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,jsx,css,html,md}\""
+	},
+	"pre-commit": [
+		"lint"
+	],
+	"dependencies": {
+		"ahooks": "^3.7.7",
+		"antd": "^5.5.2",
+		"axios": "^1.4.0",
+		"dayjs": "^1.11.8",
+		"lodash-es": "^4.17.21",
+		"qs": "^6.11.2",
+		"react": "^18.2.0",
+		"react-activation": "^0.12.4",
+		"react-dom": "^18.2.0",
+		"react-node-key": "^0.4.0",
+		"react-router-dom": "^6.11.2",
+		"react-spring": "^9.7.1",
+		"zustand": "^4.3.8"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.22.1",
+		"@babel/eslint-parser": "^7.21.8",
+		"@babel/preset-react": "^7.22.3",
+		"@vitejs/plugin-react": "^4.0.0",
+		"autoprefixer": "^10.4.14",
+		"eslint": "^8.42.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.32.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"postcss": "^8.4.24",
+		"pre-commit": "^1.2.2",
+		"prettier": "^2.8.8",
+		"rollup-plugin-visualizer": "^5.9.0",
+		"tailwindcss": "^3.3.2",
+		"vite": "^4.3.9",
+		"vite-plugin-eslint": "^1.8.1",
+		"vite-plugin-html": "^3.2.0"
+	}
+}
