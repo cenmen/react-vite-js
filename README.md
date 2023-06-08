@@ -53,7 +53,6 @@ npm run lint:prettier
 │  ├─ components          # 公用组件
 │  ├─ layout              # 布局组件
 │  ├─ ├─ Header           # 布局头部组件
-│  ├─ ├─ KeepAlive        # 存状态组件（慎用）
 │  ├─ ├─ Layout           # 整体布局组件
 │  ├─ ├─ Menu             # 左侧菜单布局组件
 │  ├─ ├─ Router           # 路由加载组件（初始化权限路由 重要）
