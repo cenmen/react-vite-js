@@ -60,7 +60,7 @@ npm run lint:prettier
 │  ├─ ├─ Tabbar           # 标签栏
 │  ├─ constants           # 全局常量
 │  ├─ routers             # 路由管理
-│  ├─ redux               # 状态中心管理
+│  ├─ store               # 状态中心管理
 │  ├─ styles              # 全局样式
 │  ├─ utils               # 工具库
 │  ├─ views               # 项目所有页面
@@ -82,9 +82,3 @@ npm run lint:prettier
 ├─ vite.config.js         # vite 配置
 └─ README.md              # README 介绍
 ```
-
-## TODOLIST
-1. KeepAlive
-2. 错误捕获
-3. zustand
-4. eslint 调整
