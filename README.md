@@ -81,3 +81,5 @@ npm run lint:prettier
 ├─ vite.config.js         # vite 配置
 └─ README.md              # README 介绍
 ```
+
+![示例图](./example.png)

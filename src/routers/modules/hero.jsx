@@ -17,7 +17,7 @@ import {
 // 数据模块
 const heroRouter = [
 	{
-		title: '英雄数据',
+		title: '示例数据',
 		path: VIEW_HERO,
 		element: <LayoutIndex />,
 		icon: <AreaChartOutlined />,
@@ -29,14 +29,14 @@ const heroRouter = [
 				element: lazyLoad(React.lazy(() => import('@/views/Hero/TestError')))
 			},
 			{
-				title: '英雄数据列表',
+				title: '数据列表',
 				path: VIEW_HERO_LIST,
 				element: lazyLoad(React.lazy(() => import('@/views/Hero/List'))),
 				auth: AUTH_KEYS.PAGE_HERO_LIST
 			},
 			{
 				isHide: true,
-				title: '英雄数据详情',
+				title: '数据详情',
 				path: VIEW_HERO_DETAIL,
 				element: lazyLoad(React.lazy(() => import('@/views/Hero/Detail'))),
 				auth: AUTH_KEYS.PAGE_HERO_DETAIL
