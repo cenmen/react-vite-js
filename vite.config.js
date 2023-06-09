@@ -76,7 +76,17 @@ export default defineConfig(({ mode, command }) => {
 				output: {
 					chunkFileNames: 'assets/js/[name]-[hash].js',
 					entryFileNames: 'assets/js/[name]-[hash].js',
-					assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+					assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+					manualChunks(id) {
+						if (id.includes('node_modules')) {
+							const name = id.toString().split('node_modules/')[1].split('/')[0];
+							if (/ant(d)?/.test(name)) {
+								return 'ant-vendor';
+							} else {
+								return 'vendor';
+							}
+						}
+					}
 				}
 			}
 		}

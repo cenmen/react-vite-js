@@ -26,7 +26,7 @@ const AvatarIcon = () => {
 
 	return (
 		<Dropdown menu={menu} placement='bottomRight' arrow>
-			<Avatar size='large' src='https://joeschmoe.io/api/v1/random' />
+			<Avatar size='large' src='../../../assets/images/logo.png' />
 		</Dropdown>
 	);
 };
